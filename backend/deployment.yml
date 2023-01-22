@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  selector:
+    matchLabels:
+      component: api
+  template:
+    metadata:
+      labels:
+        component: api
+    spec:
+      containers:
+        - name: api
+          image: localhost/lpmau-api
+          imagePullPolicy: Never
+          env:
+            - name: DATABASE_URL
+              value: file:./dev.db
+          ports:
+            - containerPort: 3000
